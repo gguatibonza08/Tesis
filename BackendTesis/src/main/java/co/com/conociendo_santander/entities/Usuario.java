@@ -7,7 +7,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -59,10 +58,10 @@ public class Usuario implements Serializable {
 	@JoinColumn(name = "id_avatar")
 	private Avatar avatar;
 
-	@OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY)
 	private List<Foto> fotos;
 
-	@OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY)
 	private List<UsuarioLogro> logrosDelUsuario;
 
 	/**
@@ -70,7 +69,6 @@ public class Usuario implements Serializable {
 	 * @param logrosDelUsuario
 	 */
 	public Usuario() {
-		super();
 		this.fotos = new ArrayList<Foto>();
 		this.logrosDelUsuario = new ArrayList<UsuarioLogro>();
 	}

@@ -7,7 +7,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -47,10 +46,10 @@ public class Logro implements Serializable {
 	@Column(name = "estado_logro")
 	private int estado;
 
-	@OneToMany(mappedBy = "logro", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "logro", fetch = FetchType.LAZY)
 	private List<LogroObjetivo> objetivosDelLogro;
 
-	@OneToMany(mappedBy = "logro", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "logro", fetch = FetchType.LAZY)
 	private List<UsuarioLogro> usuariosPorLogro;
 
 	/**
@@ -58,7 +57,6 @@ public class Logro implements Serializable {
 	 * @param usuariosPorLogro
 	 */
 	public Logro() {
-		super();
 		this.objetivosDelLogro = new ArrayList<LogroObjetivo>();
 		this.usuariosPorLogro = new ArrayList<UsuarioLogro>();
 	}

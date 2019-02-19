@@ -6,7 +6,6 @@ package co.com.conociendo_santander.entities;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -40,7 +39,7 @@ public class Avatar implements Serializable {
 	@Column(name = "url_avatar")
 	private String urlAvatar;
 
-	@OneToMany(mappedBy = "avatar", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "avatar", fetch = FetchType.LAZY)
 	private List<Usuario> usuarios;
 
 	/**

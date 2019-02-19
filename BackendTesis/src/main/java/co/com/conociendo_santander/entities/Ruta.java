@@ -7,7 +7,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -41,7 +40,7 @@ public class Ruta implements Serializable {
 	@Column(name = "descripcion_ruta")
 	private String descripcion;
 
-	@OneToMany(mappedBy = "ruta", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "ruta", fetch = FetchType.LAZY)
 	private List<Atractivo> atractivos;
 
 	/**

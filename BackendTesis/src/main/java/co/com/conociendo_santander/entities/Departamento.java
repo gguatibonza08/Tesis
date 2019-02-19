@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -34,14 +33,13 @@ public class Departamento implements Serializable {
 	@Column(name = "latitud_departamento")
 	private double latitudDepartamento;
 
-	@OneToMany(mappedBy = "departamento", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "departamento", fetch = FetchType.LAZY)
 	private List<Municipio> municipios;
 
 	/**
 	 * @param municipios
 	 */
 	public Departamento() {
-		super();
 		this.municipios = new ArrayList<Municipio>();
 	}
 

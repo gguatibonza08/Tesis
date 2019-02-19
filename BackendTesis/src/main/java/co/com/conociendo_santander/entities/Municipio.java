@@ -62,16 +62,16 @@ public class Municipio implements Serializable {
 	@JoinColumn(name = "id_departamento")
 	private Departamento departamento;
 
-	@OneToMany(mappedBy = "municipio", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "municipio", fetch = FetchType.LAZY)
 	private List<Alojamiento> alojamientos;
 
-	@OneToMany(mappedBy = "municipio", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "municipio", fetch = FetchType.LAZY)
 	private List<Atractivo> atractivos;
 
-	@OneToMany(mappedBy = "municipio", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "municipio", fetch = FetchType.LAZY)
 	private List<Foto> fotos;
 
-	@OneToMany(mappedBy = "municipio", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "municipio", fetch = FetchType.LAZY)
 	private List<Restaurante> restaurantes;
 
 	/**
@@ -81,7 +81,6 @@ public class Municipio implements Serializable {
 	 * @param restaurantes
 	 */
 	public Municipio() {
-		super();
 		this.alojamientos = new ArrayList<Alojamiento>();
 		this.atractivos = new ArrayList<Atractivo>();
 		this.fotos = new ArrayList<Foto>();
