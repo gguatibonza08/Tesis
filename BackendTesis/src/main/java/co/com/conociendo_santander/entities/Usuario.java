@@ -7,9 +7,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -18,12 +18,19 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 /**
  * @author gian
  *
  */
 @Entity
 @Table(name = "usuarios")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "idUsuario")
 public class Usuario implements Serializable {
 
 	/**
@@ -36,32 +43,36 @@ public class Usuario implements Serializable {
 	@Column(name = "id_usuario")
 	private Long idUsuario;
 
-	@Column(name = "nombre_usuario")
+	@Column(name = "nombre")
 	private String nombre;
 
-	@Column(name = "apellido_usuario")
+	@Column(name = "apellido")
 	private String apellido;
 
-	@Column(name = "correo_usuario")
+	@Column(name = "correo")
 	private String correo;
 
-	@Column(name = "contrasena_usuario")
+	@JsonIgnore
+	@Column(name = "contrasena")
 	private String contrasena;
 
-	@Column(name = "apodo_usuario")
+	@Column(name = "apodo")
 	private String apodo;
 
-	@Column(name = "telefono_usuario")
+	@Column(name = "telefono")
 	private String telefono;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_avatar")
+	@JsonManagedReference
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "avatar")
 	private Avatar avatar;
 
-	@OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY)
+	@JsonBackReference
+	@OneToMany(mappedBy = "usuario")
 	private List<Foto> fotos;
 
-	@OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY)
+	@JsonBackReference
+	@OneToMany(mappedBy = "usuario")
 	private List<UsuarioLogro> logrosDelUsuario;
 
 	/**

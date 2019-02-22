@@ -12,5 +12,9 @@ import co.com.conociendo_santander.entities.Departamento;
 public interface IDepartamentoService {
 
 	public List<Departamento> findAll();
+	
+	public Departamento findById(Long id);
+	
+	public boolean existId(Long id);
 
 }

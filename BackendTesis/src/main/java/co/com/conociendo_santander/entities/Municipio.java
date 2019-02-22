@@ -10,7 +10,6 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -19,12 +18,18 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 /**
  * @author gian
  *
  */
 @Entity
 @Table(name = "municipios")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "idMunicipio")
 public class Municipio implements Serializable {
 
 	/**
@@ -37,41 +42,43 @@ public class Municipio implements Serializable {
 	@Column(name = "id_municipio")
 	private Long idMunicipio;
 
-	@Column(name = "nombre_municipio")
+	@Column(name = "nombre")
 	private String nombre;
 
-	@Column(name = "longitud_municipio")
+	@Column(name = "longitud")
 	private double longitud;
 
-	@Column(name = "latitud_municipio")
+	@Column(name = "latitud")
 	private double latitud;
 
-	@Column(name = "descripcion_basica_municipio")
-	private String descripcionBasica;
+	@Column(name = "basica")
+	private String basica;
 
-	@Column(name = "descripcion_larga_municipio")
-	private String descripcionLarga;
+	@Column(name = "extensa")
+	private String extensa;
 
-	@Column(name = "id_instagram")
-	private int idInstagram;
-
-	@Column(name = "foto_municipio")
+	@Column(name = "foto")
 	private String foto;
 
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "id_departamento")
+	@JsonIgnore
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "departamento")
 	private Departamento departamento;
 
-	@OneToMany(mappedBy = "municipio", fetch = FetchType.LAZY)
+	@JsonBackReference
+	@OneToMany(mappedBy = "municipio")
 	private List<Alojamiento> alojamientos;
 
-	@OneToMany(mappedBy = "municipio", fetch = FetchType.LAZY)
+	@JsonBackReference
+	@OneToMany(mappedBy = "municipio")
 	private List<Atractivo> atractivos;
 
-	@OneToMany(mappedBy = "municipio", fetch = FetchType.LAZY)
+	@JsonBackReference
+	@OneToMany(mappedBy = "municipio")
 	private List<Foto> fotos;
 
-	@OneToMany(mappedBy = "municipio", fetch = FetchType.LAZY)
+	@JsonBackReference
+	@OneToMany(mappedBy = "municipio")
 	private List<Restaurante> restaurantes;
 
 	/**
@@ -147,42 +154,28 @@ public class Municipio implements Serializable {
 	 * @return the descripcionBasica
 	 */
 	public String getDescripcionBasica() {
-		return descripcionBasica;
+		return basica;
 	}
 
 	/**
 	 * @param descripcionBasica the descripcionBasica to set
 	 */
 	public void setDescripcionBasica(String descripcionBasica) {
-		this.descripcionBasica = descripcionBasica;
+		this.basica = descripcionBasica;
 	}
 
 	/**
 	 * @return the descripcionLarga
 	 */
 	public String getDescripcionLarga() {
-		return descripcionLarga;
+		return extensa;
 	}
 
 	/**
 	 * @param descripcionLarga the descripcionLarga to set
 	 */
 	public void setDescripcionLarga(String descripcionLarga) {
-		this.descripcionLarga = descripcionLarga;
-	}
-
-	/**
-	 * @return the idInstagram
-	 */
-	public int getIdInstagram() {
-		return idInstagram;
-	}
-
-	/**
-	 * @param idInstagram the idInstagram to set
-	 */
-	public void setIdInstagram(int idInstagram) {
-		this.idInstagram = idInstagram;
+		this.extensa = descripcionLarga;
 	}
 
 	/**

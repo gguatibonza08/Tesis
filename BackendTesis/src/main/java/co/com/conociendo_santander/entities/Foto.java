@@ -8,7 +8,6 @@ import java.io.Serializable;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -16,12 +15,17 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 /**
  * @author gian
  *
  */
 @Entity
 @Table(name = "fotos")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "idFoto")
 public class Foto implements Serializable {
 
 	/**
@@ -34,15 +38,17 @@ public class Foto implements Serializable {
 	@Column(name = "id_foto")
 	private Long idFoto;
 
-	@Column(name = "url_foto")
+	@Column(name = "url")
 	private String url;
 
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "id_usuario")
+	@JsonManagedReference
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "usuario")
 	private Usuario usuario;
 
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "id_municipio")
+	@JsonManagedReference
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "municipio")
 	private Municipio municipio;
 
 	/**

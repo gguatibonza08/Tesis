@@ -9,12 +9,15 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 /**
  * @author gian
@@ -22,6 +25,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "objetivos")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "idObjetivo")
 public class Objetivo implements Serializable {
 
 	/**
@@ -34,13 +38,14 @@ public class Objetivo implements Serializable {
 	@Column(name = "id_objetivo")
 	private Long idObjetivo;
 
-	@Column(name = "nombre_objetivo")
+	@Column(name = "nombre")
 	private String nombre;
 
-	@Column(name = "descripcion_objetivo")
+	@Column(name = "descripcion")
 	private String descripcion;
 
-	@OneToMany(mappedBy = "objetivo", fetch = FetchType.LAZY)
+	@JsonBackReference
+	@OneToMany(mappedBy = "objetivo")
 	private List<LogroObjetivo> logroDelObjetivo;
 
 	/**

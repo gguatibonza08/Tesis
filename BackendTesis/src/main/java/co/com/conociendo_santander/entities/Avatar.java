@@ -8,12 +8,15 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 /**
  * @author gian
@@ -21,6 +24,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "avatares")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "idAvatar")
 public class Avatar implements Serializable {
 
 	/**
@@ -33,13 +37,14 @@ public class Avatar implements Serializable {
 	@Column(name = "id_avatar")
 	private Long idAvatar;
 
-	@Column(name = "nombre_avatar")
+	@Column(name = "nombre")
 	private String nombreAvatar;
 
-	@Column(name = "url_avatar")
+	@Column(name = "url")
 	private String urlAvatar;
 
-	@OneToMany(mappedBy = "avatar", fetch = FetchType.LAZY)
+	@JsonBackReference
+	@OneToMany(mappedBy = "avatar")
 	private List<Usuario> usuarios;
 
 	/**

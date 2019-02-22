@@ -8,7 +8,6 @@ import java.io.Serializable;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -16,12 +15,17 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 /**
  * @author gian
  *
  */
 @Entity
 @Table(name = "atractivos")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "idAtractivo")
 public class Atractivo implements Serializable {
 
 	/**
@@ -34,27 +38,26 @@ public class Atractivo implements Serializable {
 	@Column(name = "id_atractivo")
 	private Long idAtractivo;
 
-	@Column(name = "nombre_atractivo")
+	@Column(name = "nombre")
 	private String nombre;
 
-	@Column(name = "longitud_atractivo")
+	@Column(name = "longitud")
 	private double longitud;
 
-	@Column(name = "latitud_atractivo")
+	@Column(name = "latitud")
 	private double latitud;
 
-	@Column(name = "descripcion_atractivo")
+	@Column(name = "descripcion")
 	private String descripcion;
 
-	@Column(name = "id_instagram")
-	private int idInstagram;
-
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "id_municipio")
+	@JsonIgnore
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "municipio")
 	private Municipio municipio;
 
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "id_ruta")
+	@JsonIgnore
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "ruta")
 	private Ruta ruta;
 
 	/**
@@ -125,20 +128,6 @@ public class Atractivo implements Serializable {
 	 */
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
-	}
-
-	/**
-	 * @return the idInstagram
-	 */
-	public int getIdInstagram() {
-		return idInstagram;
-	}
-
-	/**
-	 * @param idInstagram the idInstagram to set
-	 */
-	public void setIdInstagram(int idInstagram) {
-		this.idInstagram = idInstagram;
 	}
 
 	/**

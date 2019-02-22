@@ -8,7 +8,6 @@ import java.io.Serializable;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -16,12 +15,17 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 /**
  * @author gian
  *
  */
 @Entity
 @Table(name = "restaurantes")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "idRestaurante")
 public class Restaurante implements Serializable {
 
 	/**
@@ -34,26 +38,27 @@ public class Restaurante implements Serializable {
 	@Column(name = "id_restaurante")
 	private Long idRestaurante;
 
-	@Column(name = "nombre_restaurante")
+	@Column(name = "nombre")
 	private String nombre;
 
-	@Column(name = "foto_restaurante")
+	@Column(name = "foto")
 	private String foto;
 
-	@Column(name = "direccion_restaurante")
+	@Column(name = "direccion")
 	private String direccion;
 
-	@Column(name = "telefono_restaurante")
+	@Column(name = "telefono")
 	private String telefono;
 
-	@Column(name = "latitud_restaurante")
+	@Column(name = "latitud")
 	private double latitud;
 
-	@Column(name = "longitud_restaurante")
+	@Column(name = "longitud")
 	private double longitud;
 
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "id_municipio")
+	@JsonManagedReference
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "municipio")
 	private Municipio municipio;
 
 	/**

@@ -33,4 +33,16 @@ public class AvatarImplements implements IAvatarService {
 		return (List<Avatar>) avatarDao.findAll();
 	}
 
+	@Override
+	public Avatar findById(Long id) {
+		// TODO Auto-generated method stub
+		return avatarDao.findById(id).get();
+	}
+
+	@Override
+	public boolean existById(Long id) {
+		// TODO Auto-generated method stub
+		return avatarDao.existsById(id);
+	}
+
 }

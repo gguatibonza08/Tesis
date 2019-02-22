@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import co.com.conociendo_santander.dao.IAlojamientoDao;
 import co.com.conociendo_santander.entities.Alojamiento;
+import co.com.conociendo_santander.entities.Municipio;
 import co.com.conociendo_santander.services.IAlojamientoService;
 
 /**
@@ -31,6 +32,12 @@ public class AlojamientoImplements implements IAlojamientoService {
 	public List<Alojamiento> findAll() {
 		// TODO Auto-generated method stub
 		return (List<Alojamiento>) alojamientoDao.findAll();
+	}
+
+	@Override
+	public List<Alojamiento> findByMunicipio(Municipio municipio) {
+		// TODO Auto-generated method stub
+		return alojamientoDao.findByMunicipio(municipio);
 	}
 
 }

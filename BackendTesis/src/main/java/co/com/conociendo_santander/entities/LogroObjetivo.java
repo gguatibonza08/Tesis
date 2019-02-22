@@ -5,13 +5,16 @@ import java.io.Serializable;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 /**
  * 
@@ -20,6 +23,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "logros_objetivos")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "idLogroObjetivo")
 public class LogroObjetivo implements Serializable {
 
 	/**
@@ -35,12 +39,14 @@ public class LogroObjetivo implements Serializable {
 	@Column(name = "estado")
 	private int estado;
 
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "id_logro")
+	@JsonManagedReference
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "logro")
 	private Logro logro;
 
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "id_objetivo")
+	@JsonManagedReference
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "objetivo")
 	private Objetivo objetivo;
 
 	/**

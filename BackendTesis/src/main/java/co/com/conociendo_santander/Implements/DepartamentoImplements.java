@@ -33,4 +33,16 @@ public class DepartamentoImplements implements IDepartamentoService {
 		return (List<Departamento>) departamentoDao.findAll();
 	}
 
+	@Override
+	public Departamento findById(Long id) {
+		// TODO Auto-generated method stub
+		return departamentoDao.findById(id).get();
+	}
+
+	@Override
+	public boolean existId(Long id) {
+		// TODO Auto-generated method stub
+		return departamentoDao.existsById(id);
+	}
+
 }

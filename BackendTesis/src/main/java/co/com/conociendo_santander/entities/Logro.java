@@ -9,12 +9,15 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 /**
  * @author gian
@@ -22,6 +25,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "logros")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "idLogro")
 public class Logro implements Serializable {
 
 	/**
@@ -34,22 +38,24 @@ public class Logro implements Serializable {
 	@Column(name = "id_logro")
 	private Long idLogro;
 
-	@Column(name = "nombre_logro")
+	@Column(name = "nombre")
 	private String nombre;
 
-	@Column(name = "descripcion_logro")
+	@Column(name = "descripcion")
 	private String descripcion;
 
-	@Column(name = "insignia_logro")
+	@Column(name = "insignia")
 	private String insignia;
 
-	@Column(name = "estado_logro")
+	@Column(name = "estado")
 	private int estado;
 
-	@OneToMany(mappedBy = "logro", fetch = FetchType.LAZY)
+	@JsonBackReference
+	@OneToMany(mappedBy = "logro")
 	private List<LogroObjetivo> objetivosDelLogro;
 
-	@OneToMany(mappedBy = "logro", fetch = FetchType.LAZY)
+	@JsonBackReference
+	@OneToMany(mappedBy = "logro")
 	private List<UsuarioLogro> usuariosPorLogro;
 
 	/**

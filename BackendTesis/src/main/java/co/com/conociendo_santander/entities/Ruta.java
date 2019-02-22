@@ -9,12 +9,15 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 /**
  * @author gian
@@ -22,6 +25,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "rutas")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "idRuta")
 public class Ruta implements Serializable {
 
 	/**
@@ -34,13 +38,14 @@ public class Ruta implements Serializable {
 	@Column(name = "id_ruta")
 	private Long idRuta;
 
-	@Column(name = "nombre_ruta")
+	@Column(name = "nombre")
 	private String nombre;
 
-	@Column(name = "descripcion_ruta")
+	@Column(name = "descripcion")
 	private String descripcion;
 
-	@OneToMany(mappedBy = "ruta", fetch = FetchType.LAZY)
+	@JsonBackReference
+	@OneToMany(mappedBy = "ruta")
 	private List<Atractivo> atractivos;
 
 	/**

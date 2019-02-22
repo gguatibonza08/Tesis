@@ -15,4 +15,8 @@ public interface IAvatarService {
 
 	public List<Avatar> findAll();
 
+	public Avatar findById(Long id);
+	
+	public boolean existById(Long id);
+
 }

@@ -6,15 +6,19 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 @Entity
 @Table(name = "departamentos")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "idDepartamento")
 public class Departamento implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -24,16 +28,17 @@ public class Departamento implements Serializable {
 	@Column(name = "id_departamento")
 	private Long idDepartamento;
 
-	@Column(name = "nombre_departamento")
+	@Column(name = "nombre")
 	private String nombreDepartamento;
 
-	@Column(name = "longitud_departamento")
+	@Column(name = "longitud")
 	private double longitudDepartamento;
 
-	@Column(name = "latitud_departamento")
+	@Column(name = "latitud")
 	private double latitudDepartamento;
 
-	@OneToMany(mappedBy = "departamento", fetch = FetchType.LAZY)
+	@JsonIgnore
+	@OneToMany(mappedBy = "departamento")
 	private List<Municipio> municipios;
 
 	/**

@@ -15,4 +15,8 @@ public interface IRutaService {
 
 	public List<Ruta> findAll();
 
+	public boolean existId(Long id);
+
+	public Ruta findById(Long id);
+
 }

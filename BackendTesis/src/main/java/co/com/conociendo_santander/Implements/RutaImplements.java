@@ -33,4 +33,16 @@ public class RutaImplements implements IRutaService {
 		return (List<Ruta>) rutaDao.findAll();
 	}
 
+	@Override
+	public boolean existId(Long id) {
+		// TODO Auto-generated method stub
+		return rutaDao.existsById(id);
+	}
+
+	@Override
+	public Ruta findById(Long id) {
+		// TODO Auto-generated method stub
+		return rutaDao.findById(id).get();
+	}
+
 }
