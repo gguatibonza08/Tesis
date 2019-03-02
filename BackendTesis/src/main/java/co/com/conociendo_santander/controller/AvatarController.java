@@ -37,7 +37,6 @@ public class AvatarController {
 		} else {
 			return null;
 		}
-
 	}
 
 }

@@ -37,25 +37,21 @@ public class AtractivoController {
 
 	@GetMapping(value = "/listar/municipio/{id}")
 	public List<Atractivo> findByMunicipio(@PathVariable Long id) {
-
 		if (municipioService.existId(id)) {
 			Municipio municipio = municipioService.findById(id);
 			return atractivoService.findByMunicipio(municipio);
 		} else {
 			return null;
 		}
-
 	}
 
 	@GetMapping(value = "/listar/ruta/{id}")
 	public List<Atractivo> findByRuta(@PathVariable Long id) {
-
 		if (rutaService.existId(id)) {
 			Ruta ruta = rutaService.findById(id);
 			return atractivoService.findByRuta(ruta);
 		} else {
 			return null;
 		}
-
 	}
 }

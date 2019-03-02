@@ -30,17 +30,14 @@ public class DepartamentoController {
 	public List<Departamento> listar() {
 		System.out.println("Vamos a listar");
 		return departamentoService.findAll();
-
 	}
 
 	@GetMapping(value = "/buscar/{id}")
 	public Departamento buscarId(@PathVariable Long id) {
-
 		if (departamentoService.existId(id)) {
 			return departamentoService.findById(id);
 		} else {
 			return null;
-
 		}
 	}
 }

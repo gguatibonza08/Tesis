@@ -32,15 +32,12 @@ public class AlojamientoController {
 
 	@GetMapping(value = "/listar/municipio/{id}")
 	public List<Alojamiento> listar(@PathVariable Long id) {
-
 		if (municipioService.existId(id)) {
 			Municipio municipio = municipioService.findById(id);
 			return alojamientoService.findByMunicipio(municipio);
-
 		} else {
 			return null;
 		}
-
 	}
 
 }

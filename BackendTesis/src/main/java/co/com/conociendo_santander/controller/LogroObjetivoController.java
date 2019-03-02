@@ -42,7 +42,6 @@ public class LogroObjetivoController {
 	public List<LogroObjetivo> finByLogro(@PathVariable Long id) {
 
 		if (logroService.existId(id)) {
-
 			Logro logro = logroService.findById(id);
 			return logroObjetivoService.findByLogro(logro);
 		} else {

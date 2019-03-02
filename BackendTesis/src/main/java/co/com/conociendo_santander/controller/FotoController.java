@@ -46,13 +46,10 @@ public class FotoController {
 
 	@GetMapping(value = "/listar/municipio/{id}")
 	public List<FotoRespuesta> findByMunicipio(@PathVariable Long id) {
-
 		if (municipioService.existId(id)) {
-
 			Municipio municipio = municipioService.findById(id);
 			List<Foto> fotos = fotoService.findByMunicipio(municipio);
 			List<FotoRespuesta> respuesta = new ArrayList<FotoRespuesta>();
-
 			for (Foto x : fotos) {
 				FotoRespuesta aux = new FotoRespuesta(x.getIdFoto(), x.getUrl(),
 						x.getUsuario().getNombre() + " " + x.getUsuario().getApellido(), x.getUsuario().getApodo(),
@@ -61,7 +58,6 @@ public class FotoController {
 				respuesta.add(aux);
 			}
 			return respuesta;
-
 		} else {
 			return null;
 		}
@@ -70,12 +66,10 @@ public class FotoController {
 
 	@GetMapping(value = "/listar/usuario/{id}")
 	public List<FotoRespuesta> findByUsuario(@PathVariable Long id) {
-
 		if (usuarioService.existId(id)) {
 			Usuario usuario = usuarioService.findById(id);
 			List<Foto> fotos = fotoService.findByUsuario(usuario);
 			List<FotoRespuesta> respuesta = new ArrayList<FotoRespuesta>();
-
 			for (Foto x : fotos) {
 				FotoRespuesta aux = new FotoRespuesta(x.getIdFoto(), x.getUrl(),
 						x.getUsuario().getNombre() + " " + x.getUsuario().getApellido(), x.getUsuario().getApodo(),
@@ -92,13 +86,11 @@ public class FotoController {
 
 	@GetMapping(value = "/listar/usuario/municipio/{idUsuario}/{idMunicipio}")
 	public List<FotoRespuesta> findByUsuarioMunicipio(@PathVariable Long idUsuario, @PathVariable Long idMunicipio) {
-
 		if (usuarioService.existId(idUsuario) && municipioService.existId(idMunicipio)) {
 			Usuario usuario = usuarioService.findById(idUsuario);
 			Municipio municipio = municipioService.findById(idMunicipio);
 			List<Foto> fotos = fotoService.findByUsuarioAndMunicipio(usuario, municipio);
 			List<FotoRespuesta> respuesta = new ArrayList<FotoRespuesta>();
-
 			for (Foto x : fotos) {
 				FotoRespuesta aux = new FotoRespuesta(x.getIdFoto(), x.getUrl(),
 						x.getUsuario().getNombre() + " " + x.getUsuario().getApellido(), x.getUsuario().getApodo(),
@@ -115,20 +107,15 @@ public class FotoController {
 
 	@PostMapping(value = "/guardar", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public RespuestaRest addFoto(@RequestBody FotoPojo foto) {
-
 		if (usuarioService.existId(foto.getIdUsuario()) && municipioService.existId(foto.getIdMunicipio())) {
-
 			Usuario usuario = usuarioService.findById(foto.getIdUsuario());
 			Municipio municipio = municipioService.findById(foto.getIdMunicipio());
-
 			Foto fotoPersist = new Foto();
 			fotoPersist.setUsuario(usuario);
 			fotoPersist.setMunicipio(municipio);
 			fotoPersist.setUrl(foto.getUrl());
 			fotoService.save(fotoPersist);
-
 			return new RespuestaRest(HttpStatus.CREATED.value(), "Se Agrego la Foto Correctamente");
-
 		} else {
 			return new RespuestaRest(HttpStatus.CONFLICT.value(), "No se pudo Agregar la foto Correctamente");
 		}
@@ -137,12 +124,9 @@ public class FotoController {
 
 	@DeleteMapping(value = "/eliminar/{id}")
 	public RespuestaRest delete(@PathVariable Long id) {
-
 		if (fotoService.existId(id)) {
-
 			fotoService.delete(id);
 			return new RespuestaRest(HttpStatus.OK.value(), "Foto eliminada Correctamente");
-
 		} else {
 			return new RespuestaRest(HttpStatus.CONFLICT.value(), "no se pudo eliminar la foto Correctamente");
 		}
