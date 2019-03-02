@@ -15,4 +15,8 @@ public interface ILogroService {
 
 	public List<Logro> findAll();
 
+	public Logro findById(Long id);
+
+	public boolean existId(Long id);
+
 }

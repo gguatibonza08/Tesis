@@ -14,4 +14,8 @@ import co.com.conociendo_santander.entities.Usuario;
 public interface IUsuarioService {
 
 	public List<Usuario> findAll();
+
+	public Usuario findById(Long id);
+
+	public boolean existId(Long id);
 }

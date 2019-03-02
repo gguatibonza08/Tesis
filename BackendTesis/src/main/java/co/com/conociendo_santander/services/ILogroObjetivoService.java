@@ -5,7 +5,9 @@ package co.com.conociendo_santander.services;
 
 import java.util.List;
 
+import co.com.conociendo_santander.entities.Logro;
 import co.com.conociendo_santander.entities.LogroObjetivo;
+import co.com.conociendo_santander.entities.Objetivo;
 
 /**
  * @author gian
@@ -13,6 +15,10 @@ import co.com.conociendo_santander.entities.LogroObjetivo;
  */
 public interface ILogroObjetivoService {
 
-	public List<LogroObjetivo> findAll();
+	public void save(LogroObjetivo logro);
+
+	public List<LogroObjetivo> findByLogro(Logro logro);
+
+	public LogroObjetivo findByLogroAndObjetivo(Logro logro, Objetivo objetivo);
 
 }

@@ -2,7 +2,6 @@ package co.com.conociendo_santander.entities;
 
 import java.io.Serializable;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,6 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
@@ -39,13 +39,13 @@ public class LogroObjetivo implements Serializable {
 	@Column(name = "estado")
 	private int estado;
 
-	@JsonManagedReference
-	@ManyToOne(cascade = CascadeType.ALL)
+	@JsonIgnore
+	@ManyToOne
 	@JoinColumn(name = "logro")
 	private Logro logro;
 
 	@JsonManagedReference
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name = "objetivo")
 	private Objetivo objetivo;
 

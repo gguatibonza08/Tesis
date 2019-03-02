@@ -5,7 +5,6 @@ package co.com.conociendo_santander.entities;
 
 import java.io.Serializable;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -57,7 +56,7 @@ public class Alojamiento implements Serializable {
 	private Double longitud;
 
 	@JsonIgnore
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name = "municipio")
 	private Municipio municipio;
 

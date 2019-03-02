@@ -34,4 +34,16 @@ public class LogroService implements ILogroService {
 		return (List<Logro>) logroDao.findAll();
 	}
 
+	@Override
+	public Logro findById(Long id) {
+		// TODO Auto-generated method stub
+		return logroDao.findById(id).get();
+	}
+
+	@Override
+	public boolean existId(Long id) {
+		// TODO Auto-generated method stub
+		return logroDao.existsById(id);
+	}
+
 }

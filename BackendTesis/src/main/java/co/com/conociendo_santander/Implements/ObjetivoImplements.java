@@ -21,4 +21,16 @@ public class ObjetivoImplements implements IObjetivoService {
 		return (List<Objetivo>) objetivoDao.findAll();
 	}
 
+	@Override
+	public Objetivo findById(Long id) {
+		// TODO Auto-generated method stub
+		return objetivoDao.findById(id).get();
+	}
+
+	@Override
+	public boolean existId(Long id) {
+		// TODO Auto-generated method stub
+		return objetivoDao.existsById(id);
+	}
+
 }

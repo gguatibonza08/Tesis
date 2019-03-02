@@ -15,4 +15,8 @@ public interface IObjetivoService {
 
 	public List<Objetivo> findAll();
 
+	public Objetivo findById(Long id);
+
+	public boolean existId(Long id);
+
 }

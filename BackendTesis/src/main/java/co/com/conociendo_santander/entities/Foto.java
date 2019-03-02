@@ -5,7 +5,6 @@ package co.com.conociendo_santander.entities;
 
 import java.io.Serializable;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -42,12 +41,12 @@ public class Foto implements Serializable {
 	private String url;
 
 	@JsonManagedReference
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name = "usuario")
 	private Usuario usuario;
 
 	@JsonManagedReference
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name = "municipio")
 	private Municipio municipio;
 

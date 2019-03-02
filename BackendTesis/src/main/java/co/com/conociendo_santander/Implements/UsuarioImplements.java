@@ -33,4 +33,16 @@ public class UsuarioImplements implements IUsuarioService {
 		return (List<Usuario>) usuarioDao.findAll();
 	}
 
+	@Override
+	public boolean existId(Long id) {
+		// TODO Auto-generated method stub
+		return usuarioDao.existsById(id);
+	}
+
+	@Override
+	public Usuario findById(Long id) {
+		// TODO Auto-generated method stub
+		return usuarioDao.findById(id).get();
+	}
+
 }

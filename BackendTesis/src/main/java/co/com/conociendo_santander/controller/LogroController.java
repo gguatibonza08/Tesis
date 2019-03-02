@@ -28,4 +28,5 @@ public class LogroController {
 	public List<Logro> listar() {
 		return logroService.findAll();
 	}
+
 }

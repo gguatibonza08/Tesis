@@ -1,14 +1,20 @@
 /**
  * 
  */
-package co.com.conociendo_santander.Responses;
+package co.com.conociendo_santander.util.responses;
+
+import java.io.Serializable;
 
 /**
  * @author gian
  *
  */
-public class MunicipioSimple {
+public class MunicipioSimple implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Long Id;
 	private String nombre;
 	private String descripcion;

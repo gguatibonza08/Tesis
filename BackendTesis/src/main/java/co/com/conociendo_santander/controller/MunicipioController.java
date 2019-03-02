@@ -12,11 +12,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import co.com.conociendo_santander.Responses.MunicipioSimple;
 import co.com.conociendo_santander.entities.Departamento;
 import co.com.conociendo_santander.entities.Municipio;
 import co.com.conociendo_santander.services.IDepartamentoService;
 import co.com.conociendo_santander.services.IMunicipioService;
+import co.com.conociendo_santander.util.responses.MunicipioSimple;
 
 /**
  * @author gian

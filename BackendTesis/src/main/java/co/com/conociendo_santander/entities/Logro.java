@@ -47,9 +47,6 @@ public class Logro implements Serializable {
 	@Column(name = "insignia")
 	private String insignia;
 
-	@Column(name = "estado")
-	private int estado;
-
 	@JsonBackReference
 	@OneToMany(mappedBy = "logro")
 	private List<LogroObjetivo> objetivosDelLogro;
@@ -121,20 +118,6 @@ public class Logro implements Serializable {
 	 */
 	public void setInsignia(String insignia) {
 		this.insignia = insignia;
-	}
-
-	/**
-	 * @return the estado
-	 */
-	public int getEstado() {
-		return estado;
-	}
-
-	/**
-	 * @param estado the estado to set
-	 */
-	public void setEstado(int estado) {
-		this.estado = estado;
 	}
 
 	/**
