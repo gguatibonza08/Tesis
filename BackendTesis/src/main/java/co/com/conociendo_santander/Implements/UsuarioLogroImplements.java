@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import co.com.conociendo_santander.dao.IUsuarioLogroDao;
-import co.com.conociendo_santander.entities.Usuario;
 import co.com.conociendo_santander.entities.UsuarioLogro;
 import co.com.conociendo_santander.services.IUsuarioLogroService;
 
@@ -32,22 +31,6 @@ public class UsuarioLogroImplements implements IUsuarioLogroService {
 	public List<UsuarioLogro> findAll() {
 		// TODO Auto-generated method stub
 		return (List<UsuarioLogro>) usuarioLogroDao.findAll();
-	}
-
-	@Override
-	public UsuarioLogro findById(Long id) {
-		return usuarioLogroDao.findById(id).get();
-	}
-
-	@Override
-	public boolean existById(Long id) {
-		return usuarioLogroDao.existsById(id);
-	}
-
-	@Override
-	public List<UsuarioLogro> findByUsuario(Usuario usuario) {
-		// TODO Auto-generated method stub
-		return usuarioLogroDao.findByUsuario(usuario);
 	}
 
 }
