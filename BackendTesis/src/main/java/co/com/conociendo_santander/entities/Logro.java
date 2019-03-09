@@ -46,6 +46,9 @@ public class Logro implements Serializable {
 
 	@Column(name = "insignia")
 	private String insignia;
+	
+	@Column(name ="default")
+	private String defecto;
 
 	@JsonBackReference
 	@OneToMany(mappedBy = "logro")

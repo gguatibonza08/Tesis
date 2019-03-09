@@ -73,6 +73,10 @@ public class Usuario implements Serializable {
 	@JsonBackReference
 	@OneToMany(mappedBy = "usuario")
 	private List<UsuarioLogro> logrosDelUsuario;
+	
+	@JsonBackReference
+	@OneToMany(mappedBy = "usuario")
+	private List<UsuarioObjetivo> objetivosDelUsuario;
 
 	/**
 	 * @param fotos
@@ -81,6 +85,7 @@ public class Usuario implements Serializable {
 	public Usuario() {
 		this.fotos = new ArrayList<Foto>();
 		this.logrosDelUsuario = new ArrayList<UsuarioLogro>();
+		this.objetivosDelUsuario = new ArrayList<UsuarioObjetivo>();
 	}
 
 	/**
@@ -222,5 +227,20 @@ public class Usuario implements Serializable {
 	public void setLogrosDelUsuario(List<UsuarioLogro> logrosDelUsuario) {
 		this.logrosDelUsuario = logrosDelUsuario;
 	}
+
+	/**
+	 * @return the objetivosDelUsuario
+	 */
+	public List<UsuarioObjetivo> getObjetivosDelUsuario() {
+		return objetivosDelUsuario;
+	}
+
+	/**
+	 * @param objetivosDelUsuario the objetivosDelUsuario to set
+	 */
+	public void setObjetivosDelUsuario(List<UsuarioObjetivo> objetivosDelUsuario) {
+		this.objetivosDelUsuario = objetivosDelUsuario;
+	}
+	
 
 }

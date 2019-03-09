@@ -58,7 +58,6 @@ public class LogroObjetivoController {
 			Logro logro = logroService.findById(idLogro);
 			Objetivo objetivo = objetivoService.findById(idObjetivo);
 			LogroObjetivo update = logroObjetivoService.findByLogroAndObjetivo(logro, objetivo);
-			update.setEstado(EstadoLogro.Completado.getId());
 			logroObjetivoService.save(update);
 
 			return new RespuestaRest(HttpStatus.OK.value(), "Estado del objetivo Completado");

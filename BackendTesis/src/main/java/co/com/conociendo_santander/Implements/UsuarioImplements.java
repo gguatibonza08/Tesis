@@ -45,4 +45,14 @@ public class UsuarioImplements implements IUsuarioService {
 		return usuarioDao.findById(id).get();
 	}
 
+	@Override
+	public void save(Usuario usuario) {
+		 usuarioDao.save(usuario);
+	}
+
+	@Override
+	public void delete(Long id) {
+		usuarioDao.deleteById(id);
+	}
+
 }

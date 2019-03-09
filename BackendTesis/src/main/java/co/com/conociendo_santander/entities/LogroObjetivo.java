@@ -36,8 +36,6 @@ public class LogroObjetivo implements Serializable {
 	@Column(name = "id_logro_objetivo")
 	private Long idLogroObjetivo;
 
-	@Column(name = "estado")
-	private int estado;
 
 	@JsonIgnore
 	@ManyToOne
@@ -61,20 +59,6 @@ public class LogroObjetivo implements Serializable {
 	 */
 	public void setIdLogroObjetivo(Long idLogroObjetivo) {
 		this.idLogroObjetivo = idLogroObjetivo;
-	}
-
-	/**
-	 * @return the estado
-	 */
-	public int getEstado() {
-		return estado;
-	}
-
-	/**
-	 * @param estado the estado to set
-	 */
-	public void setEstado(int estado) {
-		this.estado = estado;
 	}
 
 	/**
