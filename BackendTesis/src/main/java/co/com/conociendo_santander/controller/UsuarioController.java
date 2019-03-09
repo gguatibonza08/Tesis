@@ -3,6 +3,8 @@
  */
 package co.com.conociendo_santander.controller;
 
+
+
 import java.util.List;
 
 import org.jasypt.util.password.BasicPasswordEncryptor;
@@ -19,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import co.com.conociendo_santander.entities.Usuario;
 import co.com.conociendo_santander.services.IAvatarService;
 import co.com.conociendo_santander.services.IUsuarioService;
+import co.com.conociendo_santander.util.pojos.LoginPojo;
 import co.com.conociendo_santander.util.pojos.UsuarioPojo;
 import co.com.conociendo_santander.util.responses.RespuestaRest;
 
@@ -102,5 +105,21 @@ public class UsuarioController {
 		usuarioModificado.setAvatar(avatarService.findById(usuarioPojo.getIdAvatar()));
 		usuarioService.save(usuarioModificado);
 		return new RespuestaRest(HttpStatus.OK.value(), "Usuario modificado");
+	}
+	
+	//Método para logueo
+	@PostMapping(value = "/loguear")
+	public Usuario LoginUsuario(@RequestBody LoginPojo loginPojo) {
+		Usuario usuario = usuarioService.findByCorreo(loginPojo.getCorreo());
+		if(usuario != null) {
+			boolean result = passwordEncryptor.checkPassword(loginPojo.getContrasena(), usuario.getContrasena());
+			if(result) {
+				return usuario;
+			}else {
+				return null;
+			}
+		}else {
+			return null;
+		}
 	}
 }

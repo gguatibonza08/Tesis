@@ -68,4 +68,14 @@ public class UsuarioImplements implements IUsuarioService {
 
 	}
 
+	@Override
+	public Usuario findByCorreo(String correo) {
+		Usuario usuario = usuarioDao.findByCorreo(correo);
+		if( usuario == null) {
+			return null;
+		}else {
+			return usuario;
+		}
+	}
+
 }
