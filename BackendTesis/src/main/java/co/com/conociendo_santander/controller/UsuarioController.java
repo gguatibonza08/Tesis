@@ -5,16 +5,13 @@ package co.com.conociendo_santander.controller;
 
 import java.util.List;
 
-import javax.ws.rs.DELETE;
-
-import org.hibernate.annotations.UpdateTimestamp;
+import org.jasypt.util.password.BasicPasswordEncryptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -32,6 +29,8 @@ import co.com.conociendo_santander.util.responses.RespuestaRest;
 @RestController
 @RequestMapping(value = "/usuarios")
 public class UsuarioController {
+
+	private BasicPasswordEncryptor passwordEncryptor = new BasicPasswordEncryptor();
 
 	@Autowired
 	private IUsuarioService usuarioService;
@@ -58,18 +57,24 @@ public class UsuarioController {
 	public RespuestaRest saveUsuario(@RequestBody UsuarioPojo usuarioPojo) {
 
 		if (avatarService.existById(usuarioPojo.getIdAvatar())) {
-			Usuario usuarioPerist = new Usuario();
-			usuarioPerist.setNombre(usuarioPojo.getNombre());
-			usuarioPerist.setApellido(usuarioPojo.getApellido());
-			usuarioPerist.setCorreo(usuarioPojo.getCorreo());
-			usuarioPerist.setContrasena(usuarioPojo.getContrasena());
-			usuarioPerist.setApodo(usuarioPojo.getApodo());
-			usuarioPerist.setTelefono(usuarioPojo.getTelefono());
-			usuarioPerist.setAvatar(avatarService.findById(usuarioPojo.getIdAvatar()));
-			usuarioService.save(usuarioPerist);
-			return new RespuestaRest(HttpStatus.CREATED.value(), " completado");
+
+			if (usuarioService.findByCorreoOrApodo(usuarioPojo.getCorreo(), usuarioPojo.getApodo())) {
+				String contrasena = passwordEncryptor.encryptPassword(usuarioPojo.getContrasena());
+				Usuario usuarioPerist = new Usuario();
+				usuarioPerist.setNombre(usuarioPojo.getNombre());
+				usuarioPerist.setApellido(usuarioPojo.getApellido());
+				usuarioPerist.setCorreo(usuarioPojo.getCorreo());
+				usuarioPerist.setContrasena(contrasena);
+				usuarioPerist.setApodo(usuarioPojo.getApodo());
+				usuarioPerist.setTelefono(usuarioPojo.getTelefono());
+				usuarioPerist.setAvatar(avatarService.findById(usuarioPojo.getIdAvatar()));
+				usuarioService.save(usuarioPerist);
+				return new RespuestaRest(HttpStatus.CREATED.value(), "Completado");
+			} else {
+				return new RespuestaRest(HttpStatus.CONFLICT.value(), "Ya existe este usuario");
+			}
 		} else {
-			return new RespuestaRest(HttpStatus.CONFLICT.value(), " no completado");
+			return new RespuestaRest(HttpStatus.CONFLICT.value(), "El avatar escogido no existe");
 		}
 	}
 

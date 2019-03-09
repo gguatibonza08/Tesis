@@ -48,14 +48,14 @@ public class Usuario implements Serializable {
 	@Column(name = "apellido")
 	private String apellido;
 
-	@Column(name = "correo")
+	@Column(name = "correo", unique = true)
 	private String correo;
 
 	@JsonIgnore
 	@Column(name = "contrasena")
 	private String contrasena;
 
-	@Column(name = "apodo")
+	@Column(name = "apodo", unique = true)
 	private String apodo;
 
 	@Column(name = "telefono")
@@ -73,7 +73,7 @@ public class Usuario implements Serializable {
 	@JsonBackReference
 	@OneToMany(mappedBy = "usuario")
 	private List<UsuarioLogro> logrosDelUsuario;
-	
+
 	@JsonBackReference
 	@OneToMany(mappedBy = "usuario")
 	private List<UsuarioObjetivo> objetivosDelUsuario;
@@ -241,6 +241,5 @@ public class Usuario implements Serializable {
 	public void setObjetivosDelUsuario(List<UsuarioObjetivo> objetivosDelUsuario) {
 		this.objetivosDelUsuario = objetivosDelUsuario;
 	}
-	
 
 }

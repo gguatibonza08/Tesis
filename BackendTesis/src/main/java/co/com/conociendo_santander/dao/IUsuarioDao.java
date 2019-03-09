@@ -13,4 +13,5 @@ import co.com.conociendo_santander.entities.Usuario;
  */
 public interface IUsuarioDao extends CrudRepository<Usuario, Long> {
 
+	public Usuario findByCorreoOrApodo(String correo,String apodo);
 }

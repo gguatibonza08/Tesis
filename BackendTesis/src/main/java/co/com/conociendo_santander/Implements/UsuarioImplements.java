@@ -47,12 +47,25 @@ public class UsuarioImplements implements IUsuarioService {
 
 	@Override
 	public void save(Usuario usuario) {
-		 usuarioDao.save(usuario);
+		usuarioDao.save(usuario);
 	}
 
 	@Override
 	public void delete(Long id) {
 		usuarioDao.deleteById(id);
+	}
+
+	@Override
+	public boolean findByCorreoOrApodo(String correo, String apodo) {
+		// TODO Auto-generated method stub
+
+		Usuario user = usuarioDao.findByCorreoOrApodo(correo, apodo);
+		if (user == null) {
+			return true;
+		} else {
+			return false;
+		}
+
 	}
 
 }
