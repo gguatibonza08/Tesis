@@ -6,6 +6,7 @@ package co.com.conociendo_santander.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,30 +27,33 @@ public class UsuarioLogroController {
 
 	@Autowired
 	private IUsuarioLogroService usuarioLogroService;
-	
+
 	@Autowired
 	private IUsuarioService usuarioService;
 
+	@Transactional(readOnly = true)
 	@GetMapping(value = "/listar")
 	public List<UsuarioLogro> listar() {
 		return usuarioLogroService.findAll();
 	}
-	
+
+	@Transactional(readOnly = true)
 	@GetMapping(value = "/buscar/{id}")
 	public UsuarioLogro findById(@PathVariable Long id) {
-		if(usuarioLogroService.existById(id)) {
+		if (usuarioLogroService.existById(id)) {
 			return usuarioLogroService.findById(id);
-		}else {
+		} else {
 			return null;
 		}
 	}
-	
+
+	@Transactional(readOnly = true)
 	@GetMapping(value = "/listar/usuario/{id}")
-	public List<UsuarioLogro> listar(@PathVariable Long id){
-		if(usuarioService.existId(id)) {
+	public List<UsuarioLogro> listar(@PathVariable Long id) {
+		if (usuarioService.existId(id)) {
 			Usuario usuario = usuarioService.findById(id);
 			return usuarioLogroService.findByUsuario(usuario);
-		}else {
+		} else {
 			return null;
 		}
 	}

@@ -6,6 +6,7 @@ package co.com.conociendo_santander.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,6 +31,7 @@ public class AlojamientoController {
 	@Autowired
 	private IMunicipioService municipioService;
 
+	@Transactional(readOnly=true)
 	@GetMapping(value = "/listar/municipio/{id}")
 	public List<Alojamiento> listar(@PathVariable Long id) {
 		if (municipioService.existId(id)) {

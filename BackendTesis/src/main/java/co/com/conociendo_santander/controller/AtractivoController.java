@@ -6,6 +6,7 @@ package co.com.conociendo_santander.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,6 +36,7 @@ public class AtractivoController {
 	@Autowired
 	private IRutaService rutaService;
 
+	@Transactional(readOnly = true)
 	@GetMapping(value = "/listar/municipio/{id}")
 	public List<Atractivo> findByMunicipio(@PathVariable Long id) {
 		if (municipioService.existId(id)) {
@@ -45,6 +47,7 @@ public class AtractivoController {
 		}
 	}
 
+	@Transactional(readOnly = true)
 	@GetMapping(value = "/listar/ruta/{id}")
 	public List<Atractivo> findByRuta(@PathVariable Long id) {
 		if (rutaService.existId(id)) {

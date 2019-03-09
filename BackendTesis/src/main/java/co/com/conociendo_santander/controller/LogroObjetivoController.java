@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,7 +19,6 @@ import co.com.conociendo_santander.entities.Objetivo;
 import co.com.conociendo_santander.services.ILogroObjetivoService;
 import co.com.conociendo_santander.services.ILogroService;
 import co.com.conociendo_santander.services.IObjetivoService;
-import co.com.conociendo_santander.util.pojos.EstadoLogro;
 import co.com.conociendo_santander.util.responses.RespuestaRest;
 
 /**
@@ -38,6 +38,7 @@ public class LogroObjetivoController {
 	@Autowired
 	private IObjetivoService objetivoService;
 
+	@Transactional(readOnly = true)
 	@GetMapping(value = "/listar/logro/{id}")
 	public List<LogroObjetivo> finByLogro(@PathVariable Long id) {
 
@@ -50,6 +51,7 @@ public class LogroObjetivoController {
 
 	}
 
+	@Transactional
 	@GetMapping(value = "/actualizar/logro/objetivo/{idLogro}/{idObjetivo}")
 	public RespuestaRest updateLogroObjetivo(@PathVariable Long idLogro, @PathVariable Long idObjetivo) {
 

@@ -9,6 +9,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -44,6 +45,7 @@ public class FotoController {
 	@Autowired
 	private IUsuarioService usuarioService;
 
+	@Transactional(readOnly = true)
 	@GetMapping(value = "/listar/municipio/{id}")
 	public List<FotoRespuesta> findByMunicipio(@PathVariable Long id) {
 		if (municipioService.existId(id)) {
@@ -64,6 +66,7 @@ public class FotoController {
 
 	}
 
+	@Transactional(readOnly = true)
 	@GetMapping(value = "/listar/usuario/{id}")
 	public List<FotoRespuesta> findByUsuario(@PathVariable Long id) {
 		if (usuarioService.existId(id)) {
@@ -84,6 +87,7 @@ public class FotoController {
 
 	}
 
+	@Transactional(readOnly = true)
 	@GetMapping(value = "/listar/usuario/municipio/{idUsuario}/{idMunicipio}")
 	public List<FotoRespuesta> findByUsuarioMunicipio(@PathVariable Long idUsuario, @PathVariable Long idMunicipio) {
 		if (usuarioService.existId(idUsuario) && municipioService.existId(idMunicipio)) {
@@ -105,6 +109,7 @@ public class FotoController {
 
 	}
 
+	@Transactional
 	@PostMapping(value = "/guardar", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public RespuestaRest addFoto(@RequestBody FotoPojo foto) {
 		if (usuarioService.existId(foto.getIdUsuario()) && municipioService.existId(foto.getIdMunicipio())) {
@@ -122,6 +127,7 @@ public class FotoController {
 
 	}
 
+	@Transactional
 	@DeleteMapping(value = "/eliminar/{id}")
 	public RespuestaRest delete(@PathVariable Long id) {
 		if (fotoService.existId(id)) {

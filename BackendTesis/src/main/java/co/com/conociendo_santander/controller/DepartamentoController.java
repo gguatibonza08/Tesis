@@ -7,6 +7,7 @@ package co.com.conociendo_santander.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,12 +27,14 @@ public class DepartamentoController {
 	@Autowired
 	private IDepartamentoService departamentoService;
 
+	@Transactional(readOnly = true)
 	@GetMapping(value = "/listar")
 	public List<Departamento> listar() {
 		System.out.println("Vamos a listar");
 		return departamentoService.findAll();
 	}
 
+	@Transactional(readOnly = true)
 	@GetMapping(value = "/buscar/{id}")
 	public Departamento buscarId(@PathVariable Long id) {
 		if (departamentoService.existId(id)) {
