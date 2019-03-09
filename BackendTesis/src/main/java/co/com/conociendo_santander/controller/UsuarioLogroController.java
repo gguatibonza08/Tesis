@@ -44,7 +44,7 @@ public class UsuarioLogroController {
 		}
 	}
 	
-	@GetMapping(value = "/listar/usurio/{id}")
+	@GetMapping(value = "/listar/usuario/{id}")
 	public List<UsuarioLogro> listar(@PathVariable Long id){
 		if(usuarioService.existId(id)) {
 			Usuario usuario = usuarioService.findById(id);

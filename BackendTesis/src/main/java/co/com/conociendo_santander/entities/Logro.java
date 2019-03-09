@@ -47,7 +47,7 @@ public class Logro implements Serializable {
 	@Column(name = "insignia")
 	private String insignia;
 	
-	@Column(name ="default")
+	@Column(name ="defecto")
 	private String defecto;
 
 	@JsonBackReference
@@ -159,4 +159,18 @@ public class Logro implements Serializable {
 		usuariosPorLogro.add(usuarioLogro);
 	}
 
+	/**
+	 * @return the defecto
+	 */
+	public String getDefecto() {
+		return defecto;
+	}
+
+	/**
+	 * @param defecto the defecto to set
+	 */
+	public void setDefecto(String defecto) {
+		this.defecto = defecto;
+	}
+	
 }

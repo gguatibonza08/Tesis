@@ -54,7 +54,7 @@ public class UsuarioController {
 	}
 
 	// Método para crear un suario
-	@PostMapping(value = "/usuarios")
+	@PostMapping(value = "/guardar")
 	public RespuestaRest saveUsuario(@RequestBody UsuarioPojo usuarioPojo) {
 
 		if (avatarService.existById(usuarioPojo.getIdAvatar())) {
