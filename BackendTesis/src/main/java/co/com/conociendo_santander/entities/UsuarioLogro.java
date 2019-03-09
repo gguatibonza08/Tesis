@@ -15,6 +15,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
@@ -40,6 +41,7 @@ public class UsuarioLogro implements Serializable {
 	@Column(name = "estado")
 	private int estado;
 
+	@JsonIgnore
 	@JsonManagedReference
 	@ManyToOne
 	@JoinColumn(name = "usuario")
