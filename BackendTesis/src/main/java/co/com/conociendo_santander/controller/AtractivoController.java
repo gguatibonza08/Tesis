@@ -14,10 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import co.com.conociendo_santander.entities.Atractivo;
 import co.com.conociendo_santander.entities.Municipio;
-import co.com.conociendo_santander.entities.Ruta;
 import co.com.conociendo_santander.services.IAtractivoService;
 import co.com.conociendo_santander.services.IMunicipioService;
-import co.com.conociendo_santander.services.IRutaService;
 
 /**
  * @author gian
@@ -33,9 +31,6 @@ public class AtractivoController {
 	@Autowired
 	private IMunicipioService municipioService;
 
-	@Autowired
-	private IRutaService rutaService;
-
 	@Transactional(readOnly = true)
 	@GetMapping(value = "/listar/municipio/{id}")
 	public List<Atractivo> findByMunicipio(@PathVariable Long id) {
@@ -47,14 +42,4 @@ public class AtractivoController {
 		}
 	}
 
-	@Transactional(readOnly = true)
-	@GetMapping(value = "/listar/ruta/{id}")
-	public List<Atractivo> findByRuta(@PathVariable Long id) {
-		if (rutaService.existId(id)) {
-			Ruta ruta = rutaService.findById(id);
-			return atractivoService.findByRuta(ruta);
-		} else {
-			return null;
-		}
-	}
 }

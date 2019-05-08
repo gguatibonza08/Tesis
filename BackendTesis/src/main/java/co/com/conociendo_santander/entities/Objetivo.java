@@ -44,10 +44,13 @@ public class Objetivo implements Serializable {
 	@Column(name = "descripcion")
 	private String descripcion;
 
+	@Column(name = "foto")
+	private String foto;
+
 	@JsonBackReference
 	@OneToMany(mappedBy = "objetivo")
 	private List<LogroObjetivo> logroDelObjetivo;
-	
+
 	@JsonBackReference
 	@OneToMany(mappedBy = "objetivo")
 	private List<UsuarioObjetivo> usuariosDelObjetivo;
@@ -129,6 +132,19 @@ public class Objetivo implements Serializable {
 	public void setUsuariosDelObjetivo(List<UsuarioObjetivo> usuariosDelObjetivo) {
 		this.usuariosDelObjetivo = usuariosDelObjetivo;
 	}
-	
+
+	/**
+	 * @return the foto
+	 */
+	public String getFoto() {
+		return foto;
+	}
+
+	/**
+	 * @param foto the foto to set
+	 */
+	public void setFoto(String foto) {
+		this.foto = foto;
+	}
 
 }

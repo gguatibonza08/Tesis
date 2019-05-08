@@ -34,7 +34,7 @@ public class Alojamiento implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_alojamiento")
+	@Column(name = "id_alojamientos")
 	private Long idAlojamiento;
 
 	@Column(name = "nombre")
@@ -46,14 +46,17 @@ public class Alojamiento implements Serializable {
 	@Column(name = "telefono")
 	private String telefono;
 
+	@Column(name = "numerowpp")
+	private String numerowpp;
+
 	@Column(name = "direccion")
 	private String direccion;
 
 	@Column(name = "latitud")
-	private Double latitud;
+	private String latitud;
 
 	@Column(name = "longitud")
-	private Double longitud;
+	private String longitud;
 
 	@JsonIgnore
 	@ManyToOne
@@ -133,28 +136,28 @@ public class Alojamiento implements Serializable {
 	/**
 	 * @return the latitud
 	 */
-	public Double getLatitud() {
+	public String getLatitud() {
 		return latitud;
 	}
 
 	/**
 	 * @param latitud the latitud to set
 	 */
-	public void setLatitud(Double latitud) {
+	public void setLatitud(String latitud) {
 		this.latitud = latitud;
 	}
 
 	/**
 	 * @return the longitud
 	 */
-	public Double getLongitud() {
+	public String getLongitud() {
 		return longitud;
 	}
 
 	/**
 	 * @param longitud the longitud to set
 	 */
-	public void setLongitud(Double longitud) {
+	public void setLongitud(String longitud) {
 		this.longitud = longitud;
 	}
 
@@ -170,6 +173,20 @@ public class Alojamiento implements Serializable {
 	 */
 	public void setMunicipio(Municipio municipio) {
 		this.municipio = municipio;
+	}
+
+	/**
+	 * @return the numerowpp
+	 */
+	public String getNumerowpp() {
+		return numerowpp;
+	}
+
+	/**
+	 * @param numerowpp the numerowpp to set
+	 */
+	public void setNumerowpp(String numerowpp) {
+		this.numerowpp = numerowpp;
 	}
 
 }

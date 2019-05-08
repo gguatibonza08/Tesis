@@ -4,18 +4,19 @@
 package co.com.conociendo_santander.entities;
 
 import java.io.Serializable;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 /**
@@ -40,12 +41,13 @@ public class Avatar implements Serializable {
 	@Column(name = "nombre")
 	private String nombreAvatar;
 
-	@Column(name = "url")
+	@Column(name = "foto")
 	private String urlAvatar;
 
-	@JsonBackReference
-	@OneToMany(mappedBy = "avatar")
-	private List<Usuario> usuarios;
+	@JsonManagedReference
+	@ManyToOne
+	@JoinColumn(name = "ruta")
+	private Ruta ruta;
 
 	/**
 	 * @return the idAvatar
@@ -92,15 +94,15 @@ public class Avatar implements Serializable {
 	/**
 	 * @return the usuarios
 	 */
-	public List<Usuario> getUsuarios() {
-		return usuarios;
+	public Ruta getRutas() {
+		return ruta;
 	}
 
 	/**
 	 * @param usuarios the usuarios to set
 	 */
-	public void setUsuarios(List<Usuario> usuarios) {
-		this.usuarios = usuarios;
+	public void setRuta(Ruta ruta) {
+		this.ruta = ruta;
 	}
 
 }

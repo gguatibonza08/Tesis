@@ -16,13 +16,13 @@ public class UsuarioObjetivoImplements implements IUsuarioObjetivoService {
 
 	@Autowired
 	private IUsuarioObjetivoDao usuarioObjetivoDao;
-	
+
 	@Override
 	public List<UsuarioObjetivo> findAll() {
 		// TODO Auto-generated method stub
 		return (List<UsuarioObjetivo>) usuarioObjetivoDao.findAll();
 	}
-	
+
 	@Override
 	public List<UsuarioObjetivo> findByUsuario(Usuario usuario) {
 		return usuarioObjetivoDao.findByUsuario(usuario);
@@ -37,5 +37,4 @@ public class UsuarioObjetivoImplements implements IUsuarioObjetivoService {
 	public void save(UsuarioObjetivo usuarioObjetivo) {
 		usuarioObjetivoDao.save(usuarioObjetivo);
 	}
-
 }

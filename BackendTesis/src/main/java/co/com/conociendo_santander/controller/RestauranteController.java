@@ -42,7 +42,6 @@ public class RestauranteController {
 	public List<Restaurante> findByMunicipio(@PathVariable Long id) {
 
 		if (municipioService.existId(id)) {
-
 			Municipio municipio = municipioService.findById(id);
 			return restauranteService.findByMunicipio(municipio);
 		} else {

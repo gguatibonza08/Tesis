@@ -1,4 +1,9 @@
+/**
+ * 
+ */
 package co.com.conociendo_santander.entities;
+
+import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,42 +14,44 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
+/**
+ * @author gian
+ *
+ */
 @Entity
-@Table(name = "usuarios_objetivos")
-public class UsuarioObjetivo {
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_usuario_objetivo")
-	private Long id;
-
-	@ManyToOne
-	@JoinColumn(name = "usuario")
-	private Usuario usuario;
-
-	@ManyToOne
-	@JoinColumn(name = "objetivo")
-	private Objetivo objetivo;
-
-	@Column(name = "estado")
-	private int estado;
+@Table(name = "usuario_municipio")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+public class UsuarioMunicipio implements Serializable {
 
 	/**
 	 * 
 	 */
-	public UsuarioObjetivo() {
-		super();
-	}
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_usuario_municipio")
+	private Long id;
+
+	@JsonManagedReference
+	@ManyToOne
+	@JoinColumn(name = "usuario")
+	private Usuario usuario;
+
+	@JsonManagedReference
+	@ManyToOne
+	@JoinColumn(name = "municipio")
+	private Municipio municipio;
 
 	/**
-	 * @param usuario
-	 * @param objetivo
+	 * 
 	 */
-	public UsuarioObjetivo(Usuario usuario, Objetivo objetivo) {
+	public UsuarioMunicipio() {
 		super();
-		this.usuario = usuario;
-		this.objetivo = objetivo;
-		this.estado = 1;
 	}
 
 	/**
@@ -76,31 +83,17 @@ public class UsuarioObjetivo {
 	}
 
 	/**
-	 * @return the objetivo
+	 * @return the municipio
 	 */
-	public Objetivo getObjetivo() {
-		return objetivo;
+	public Municipio getMunicipio() {
+		return municipio;
 	}
 
 	/**
-	 * @param objetivo the objetivo to set
+	 * @param municipio the municipio to set
 	 */
-	public void setObjetivo(Objetivo objetivo) {
-		this.objetivo = objetivo;
-	}
-
-	/**
-	 * @return the estado
-	 */
-	public int getEstado() {
-		return estado;
-	}
-
-	/**
-	 * @param estado the estado to set
-	 */
-	public void setEstado(int estado) {
-		this.estado = estado;
+	public void setMunicipio(Municipio municipio) {
+		this.municipio = municipio;
 	}
 
 }

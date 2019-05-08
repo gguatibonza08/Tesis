@@ -9,10 +9,10 @@ public class UsuarioPojo {
 	private String contrasena;
 	private String apodo;
 	private String telefono;
-	private Long idAvatar;
-	
-	public UsuarioPojo(Long id, String nombre, String apellido, String correo, String contrasena, String apodo, String telefono,
-			Long idAvatar) {
+	private String foto;
+
+	public UsuarioPojo(Long id, String nombre, String apellido, String correo, String contrasena, String apodo,
+			String telefono, String foto) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
@@ -21,7 +21,7 @@ public class UsuarioPojo {
 		this.contrasena = contrasena;
 		this.apodo = apodo;
 		this.telefono = telefono;
-		this.idAvatar = idAvatar;
+		this.foto = foto;
 	}
 
 	/**
@@ -111,15 +111,15 @@ public class UsuarioPojo {
 	/**
 	 * @return the idAvatar
 	 */
-	public Long getIdAvatar() {
-		return idAvatar;
+	public String getFoto() {
+		return foto;
 	}
 
 	/**
 	 * @param idAvatar the idAvatar to set
 	 */
-	public void setIdAvatar(Long idAvatar) {
-		this.idAvatar = idAvatar;
+	public void setFoto(String foto) {
+		this.foto = foto;
 	}
 
 	/**
@@ -135,5 +135,5 @@ public class UsuarioPojo {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
+
 }

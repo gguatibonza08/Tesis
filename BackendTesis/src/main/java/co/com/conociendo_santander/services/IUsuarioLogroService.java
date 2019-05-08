@@ -14,6 +14,8 @@ import co.com.conociendo_santander.entities.UsuarioLogro;
  */
 public interface IUsuarioLogroService {
 
+	public void save(UsuarioLogro usuarioLogro);
+	
 	public List<UsuarioLogro> findAll();
 	
 	public UsuarioLogro findById(Long id);

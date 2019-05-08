@@ -18,7 +18,7 @@ import co.com.conociendo_santander.services.ILogroService;
  *
  */
 @Service
-public class LogroService implements ILogroService {
+public class LogroServiceImplements implements ILogroService {
 
 	@Autowired
 	private ILogroDao logroDao;

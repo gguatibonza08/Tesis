@@ -12,15 +12,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 /**
@@ -61,10 +60,8 @@ public class Usuario implements Serializable {
 	@Column(name = "telefono")
 	private String telefono;
 
-	@JsonManagedReference
-	@ManyToOne
-	@JoinColumn(name = "avatar")
-	private Avatar avatar;
+	@Column(name = "foto")
+	private String foto;
 
 	@JsonBackReference
 	@OneToMany(mappedBy = "usuario")
@@ -76,6 +73,10 @@ public class Usuario implements Serializable {
 
 	@JsonBackReference
 	@OneToMany(mappedBy = "usuario")
+	private List<UsuarioMunicipio> usuariosMunicipios;
+
+	@JsonBackReference
+	@OneToMany(mappedBy = "usuario")
 	private List<UsuarioObjetivo> objetivosDelUsuario;
 
 	/**
@@ -83,6 +84,7 @@ public class Usuario implements Serializable {
 	 * @param logrosDelUsuario
 	 */
 	public Usuario() {
+		this.usuariosMunicipios = new ArrayList<UsuarioMunicipio>();
 		this.fotos = new ArrayList<Foto>();
 		this.logrosDelUsuario = new ArrayList<UsuarioLogro>();
 		this.objetivosDelUsuario = new ArrayList<UsuarioObjetivo>();
@@ -187,20 +189,6 @@ public class Usuario implements Serializable {
 	}
 
 	/**
-	 * @return the avatar
-	 */
-	public Avatar getAvatar() {
-		return avatar;
-	}
-
-	/**
-	 * @param avatar the avatar to set
-	 */
-	public void setAvatar(Avatar avatar) {
-		this.avatar = avatar;
-	}
-
-	/**
 	 * @return the fotos
 	 */
 	public List<Foto> getFotos() {
@@ -240,6 +228,34 @@ public class Usuario implements Serializable {
 	 */
 	public void setObjetivosDelUsuario(List<UsuarioObjetivo> objetivosDelUsuario) {
 		this.objetivosDelUsuario = objetivosDelUsuario;
+	}
+
+	/**
+	 * @return the foto
+	 */
+	public String getFoto() {
+		return foto;
+	}
+
+	/**
+	 * @param foto the foto to set
+	 */
+	public void setFoto(String foto) {
+		this.foto = foto;
+	}
+
+	/**
+	 * @return the usuariosMunicipios
+	 */
+	public List<UsuarioMunicipio> getUsuariosMunicipios() {
+		return usuariosMunicipios;
+	}
+
+	/**
+	 * @param usuariosMunicipios the usuariosMunicipios to set
+	 */
+	public void setUsuariosMunicipios(List<UsuarioMunicipio> usuariosMunicipios) {
+		this.usuariosMunicipios = usuariosMunicipios;
 	}
 
 }

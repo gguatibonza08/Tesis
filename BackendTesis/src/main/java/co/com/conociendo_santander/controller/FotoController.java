@@ -55,8 +55,7 @@ public class FotoController {
 			for (Foto x : fotos) {
 				FotoRespuesta aux = new FotoRespuesta(x.getIdFoto(), x.getUrl(),
 						x.getUsuario().getNombre() + " " + x.getUsuario().getApellido(), x.getUsuario().getApodo(),
-						x.getUsuario().getAvatar().getUrlAvatar(), x.getMunicipio().getIdMunicipio(),
-						x.getMunicipio().getNombre());
+						x.getUsuario().getFoto(), x.getMunicipio().getIdMunicipio(), x.getMunicipio().getNombre());
 				respuesta.add(aux);
 			}
 			return respuesta;
@@ -76,8 +75,7 @@ public class FotoController {
 			for (Foto x : fotos) {
 				FotoRespuesta aux = new FotoRespuesta(x.getIdFoto(), x.getUrl(),
 						x.getUsuario().getNombre() + " " + x.getUsuario().getApellido(), x.getUsuario().getApodo(),
-						x.getUsuario().getAvatar().getUrlAvatar(), x.getMunicipio().getIdMunicipio(),
-						x.getMunicipio().getNombre());
+						x.getUsuario().getFoto(), x.getMunicipio().getIdMunicipio(), x.getMunicipio().getNombre());
 				respuesta.add(aux);
 			}
 			return respuesta;
@@ -98,8 +96,7 @@ public class FotoController {
 			for (Foto x : fotos) {
 				FotoRespuesta aux = new FotoRespuesta(x.getIdFoto(), x.getUrl(),
 						x.getUsuario().getNombre() + " " + x.getUsuario().getApellido(), x.getUsuario().getApodo(),
-						x.getUsuario().getAvatar().getUrlAvatar(), x.getMunicipio().getIdMunicipio(),
-						x.getMunicipio().getNombre());
+						x.getUsuario().getFoto(), x.getMunicipio().getIdMunicipio(), x.getMunicipio().getNombre());
 				respuesta.add(aux);
 			}
 			return respuesta;

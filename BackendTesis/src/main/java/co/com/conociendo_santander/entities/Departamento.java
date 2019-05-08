@@ -9,6 +9,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -32,10 +34,18 @@ public class Departamento implements Serializable {
 	private String nombreDepartamento;
 
 	@Column(name = "longitud")
-	private double longitudDepartamento;
+	private String longitudDepartamento;
 
 	@Column(name = "latitud")
-	private double latitudDepartamento;
+	private String latitudDepartamento;
+
+	@Column(name = "foto")
+	private String foto;
+
+	@JsonIgnore
+	@ManyToOne
+	@JoinColumn(name = "pais")
+	private Pais pais;
 
 	@JsonIgnore
 	@OneToMany(mappedBy = "departamento")
@@ -79,28 +89,28 @@ public class Departamento implements Serializable {
 	/**
 	 * @return the longitudDepartamento
 	 */
-	public double getLongitudDepartamento() {
+	public String getLongitudDepartamento() {
 		return longitudDepartamento;
 	}
 
 	/**
 	 * @param longitudDepartamento the longitudDepartamento to set
 	 */
-	public void setLongitudDepartamento(double longitudDepartamento) {
+	public void setLongitudDepartamento(String longitudDepartamento) {
 		this.longitudDepartamento = longitudDepartamento;
 	}
 
 	/**
 	 * @return the latitudDepartamento
 	 */
-	public double getLatitudDepartamento() {
+	public String getLatitudDepartamento() {
 		return latitudDepartamento;
 	}
 
 	/**
 	 * @param latitudDepartamento the latitudDepartamento to set
 	 */
-	public void setLatitudDepartamento(double latitudDepartamento) {
+	public void setLatitudDepartamento(String latitudDepartamento) {
 		this.latitudDepartamento = latitudDepartamento;
 	}
 
@@ -120,6 +130,34 @@ public class Departamento implements Serializable {
 
 	public void addMunicipio(Municipio municipio) {
 		municipios.add(municipio);
+	}
+
+	/**
+	 * @return the foto
+	 */
+	public String getFoto() {
+		return foto;
+	}
+
+	/**
+	 * @param foto the foto to set
+	 */
+	public void setFoto(String foto) {
+		this.foto = foto;
+	}
+
+	/**
+	 * @return the pais
+	 */
+	public Pais getPais() {
+		return pais;
+	}
+
+	/**
+	 * @param pais the pais to set
+	 */
+	public void setPais(Pais pais) {
+		this.pais = pais;
 	}
 
 }

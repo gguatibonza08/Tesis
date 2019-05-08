@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import co.com.conociendo_santander.dao.IAtractivoDao;
 import co.com.conociendo_santander.entities.Atractivo;
 import co.com.conociendo_santander.entities.Municipio;
-import co.com.conociendo_santander.entities.Ruta;
 import co.com.conociendo_santander.services.IAtractivoService;
 
 /**
@@ -34,12 +33,6 @@ public class AtractivoImplements implements IAtractivoService {
 	public List<Atractivo> findByMunicipio(Municipio municipio) {
 		// TODO Auto-generated method stub
 		return atractivoDao.findByMunicipio(municipio);
-	}
-
-	@Override
-	public List<Atractivo> findByRuta(Ruta ruta) {
-		// TODO Auto-generated method stub
-		return atractivoDao.findByRuta(ruta);
 	}
 
 }

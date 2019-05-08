@@ -45,10 +45,10 @@ public class Municipio implements Serializable {
 	private String nombre;
 
 	@Column(name = "longitud")
-	private double longitud;
+	private String longitud;
 
 	@Column(name = "latitud")
-	private double latitud;
+	private String latitud;
 
 	@Column(name = "basica")
 	private String basica;
@@ -58,6 +58,12 @@ public class Municipio implements Serializable {
 
 	@Column(name = "foto")
 	private String foto;
+
+	@Column(name = "escudo")
+	private String escudo;
+
+	@Column(name = "bandera")
+	private String bandera;
 
 	@JsonIgnore
 	@ManyToOne
@@ -80,13 +86,24 @@ public class Municipio implements Serializable {
 	@OneToMany(mappedBy = "municipio")
 	private List<Restaurante> restaurantes;
 
+	@JsonBackReference
+	@OneToMany(mappedBy = "municipio")
+	private List<UsuarioMunicipio> usuariosMunicipios;
+
+	@JsonBackReference
+	@OneToMany(mappedBy = "municipio")
+	private List<Ruta> rutas;
+
 	/**
+	 * @param rutas
 	 * @param alojamientos
 	 * @param atractivos
 	 * @param fotos
 	 * @param restaurantes
 	 */
 	public Municipio() {
+		this.usuariosMunicipios = new ArrayList<UsuarioMunicipio>();
+		this.rutas = new ArrayList<Ruta>();
 		this.alojamientos = new ArrayList<Alojamiento>();
 		this.atractivos = new ArrayList<Atractivo>();
 		this.fotos = new ArrayList<Foto>();
@@ -124,57 +141,57 @@ public class Municipio implements Serializable {
 	/**
 	 * @return the longitud
 	 */
-	public double getLongitud() {
+	public String getLongitud() {
 		return longitud;
 	}
 
 	/**
 	 * @param longitud the longitud to set
 	 */
-	public void setLongitud(double longitud) {
+	public void setLongitud(String longitud) {
 		this.longitud = longitud;
 	}
 
 	/**
 	 * @return the latitud
 	 */
-	public double getLatitud() {
+	public String getLatitud() {
 		return latitud;
 	}
 
 	/**
 	 * @param latitud the latitud to set
 	 */
-	public void setLatitud(double latitud) {
+	public void setLatitud(String latitud) {
 		this.latitud = latitud;
 	}
 
 	/**
-	 * @return the descripcionBasica
+	 * @return the basica
 	 */
-	public String getDescripcionBasica() {
+	public String getBasica() {
 		return basica;
 	}
 
 	/**
-	 * @param descripcionBasica the descripcionBasica to set
+	 * @param basica the basica to set
 	 */
-	public void setDescripcionBasica(String descripcionBasica) {
-		this.basica = descripcionBasica;
+	public void setBasica(String basica) {
+		this.basica = basica;
 	}
 
 	/**
-	 * @return the descripcionLarga
+	 * @return the extensa
 	 */
-	public String getDescripcionLarga() {
+	public String getExtensa() {
 		return extensa;
 	}
 
 	/**
-	 * @param descripcionLarga the descripcionLarga to set
+	 * @param extensa the extensa to set
 	 */
-	public void setDescripcionLarga(String descripcionLarga) {
-		this.extensa = descripcionLarga;
+	public void setExtensa(String extensa) {
+		this.extensa = extensa;
 	}
 
 	/**
@@ -259,6 +276,62 @@ public class Municipio implements Serializable {
 	 */
 	public void setRestaurantes(List<Restaurante> restaurantes) {
 		this.restaurantes = restaurantes;
+	}
+
+	/**
+	 * @return the usuariosMunicipios
+	 */
+	public List<UsuarioMunicipio> getUsuariosMunicipios() {
+		return usuariosMunicipios;
+	}
+
+	/**
+	 * @param usuariosMunicipios the usuariosMunicipios to set
+	 */
+	public void setUsuariosMunicipios(List<UsuarioMunicipio> usuariosMunicipios) {
+		this.usuariosMunicipios = usuariosMunicipios;
+	}
+
+	/**
+	 * @return the rutas
+	 */
+	public List<Ruta> getRutas() {
+		return rutas;
+	}
+
+	/**
+	 * @param rutas the rutas to set
+	 */
+	public void setRutas(List<Ruta> rutas) {
+		this.rutas = rutas;
+	}
+
+	/**
+	 * @return the escudo
+	 */
+	public String getEscudo() {
+		return escudo;
+	}
+
+	/**
+	 * @param escudo the escudo to set
+	 */
+	public void setEscudo(String escudo) {
+		this.escudo = escudo;
+	}
+
+	/**
+	 * @return the bandera
+	 */
+	public String getBandera() {
+		return bandera;
+	}
+
+	/**
+	 * @param bandera the bandera to set
+	 */
+	public void setBandera(String bandera) {
+		this.bandera = bandera;
 	}
 
 }

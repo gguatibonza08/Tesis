@@ -53,6 +53,24 @@ public class UsuarioLogro implements Serializable {
 	private Logro logro;
 
 	/**
+	 * 
+	 */
+	public UsuarioLogro() {
+		super();
+	}
+
+	/**
+	 * @param usuario
+	 * @param logro
+	 */
+	public UsuarioLogro(Usuario usuario, Logro logro) {
+		super();
+		this.usuario = usuario;
+		this.logro = logro;
+		this.estado = 1;
+	}
+
+	/**
 	 * @return the idUsuarioLogro
 	 */
 	public Long getIdUsuarioLogro() {

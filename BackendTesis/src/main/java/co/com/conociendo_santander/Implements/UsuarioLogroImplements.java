@@ -50,4 +50,10 @@ public class UsuarioLogroImplements implements IUsuarioLogroService {
 		return usuarioLogroDao.findByUsuario(usuario);
 	}
 
+	@Override
+	public void save(UsuarioLogro usuarioLogro) {
+		// TODO Auto-generated method stub
+		usuarioLogroDao.save(usuarioLogro);
+	}
+
 }

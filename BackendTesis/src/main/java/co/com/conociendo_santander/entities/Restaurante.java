@@ -15,6 +15,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
@@ -49,13 +50,16 @@ public class Restaurante implements Serializable {
 	@Column(name = "telefono")
 	private String telefono;
 
+	@Column(name = "numerowpp")
+	private String numerowpp;
+
 	@Column(name = "latitud")
-	private double latitud;
+	private String latitud;
 
 	@Column(name = "longitud")
-	private double longitud;
+	private String longitud;
 
-	@JsonManagedReference
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "municipio")
 	private Municipio municipio;
@@ -133,28 +137,28 @@ public class Restaurante implements Serializable {
 	/**
 	 * @return the latitud
 	 */
-	public double getLatitud() {
+	public String getLatitud() {
 		return latitud;
 	}
 
 	/**
 	 * @param latitud the latitud to set
 	 */
-	public void setLatitud(double latitud) {
+	public void setLatitud(String latitud) {
 		this.latitud = latitud;
 	}
 
 	/**
 	 * @return the longitud
 	 */
-	public double getLongitud() {
+	public String getLongitud() {
 		return longitud;
 	}
 
 	/**
 	 * @param longitud the longitud to set
 	 */
-	public void setLongitud(double longitud) {
+	public void setLongitud(String longitud) {
 		this.longitud = longitud;
 	}
 
@@ -170,6 +174,20 @@ public class Restaurante implements Serializable {
 	 */
 	public void setMunicipio(Municipio municipio) {
 		this.municipio = municipio;
+	}
+
+	/**
+	 * @return the numerowpp
+	 */
+	public String getNumerowpp() {
+		return numerowpp;
+	}
+
+	/**
+	 * @param numerowpp the numerowpp to set
+	 */
+	public void setNumerowpp(String numerowpp) {
+		this.numerowpp = numerowpp;
 	}
 
 }

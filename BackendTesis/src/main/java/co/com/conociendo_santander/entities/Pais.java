@@ -4,18 +4,19 @@
 package co.com.conociendo_santander.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 /**
@@ -23,19 +24,18 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
  *
  */
 @Entity
-@Table(name = "atractivos")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "idAtractivo")
-public class Atractivo implements Serializable {
+@Table(name = "paises")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "idPais")
+public class Pais implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_atractivo")
-	private Long idAtractivo;
+	@Column(name = "id_pais")
+	private Long idPais;
 
 	@Column(name = "nombre")
 	private String nombre;
@@ -46,29 +46,32 @@ public class Atractivo implements Serializable {
 	@Column(name = "latitud")
 	private String latitud;
 
-	@Column(name = "descripcion")
-	private String descripcion;
-
-	@JsonIgnore
-	@ManyToOne
-	@JoinColumn(name = "municipio")
-	private Municipio municipio;
-
 	@Column(name = "foto")
 	private String foto;
 
+	@JsonBackReference
+	@OneToMany(mappedBy = "pais")
+	private List<Departamento> departamentos;
+
 	/**
-	 * @return the idAtractivo
+	 * @param departamentos
 	 */
-	public Long getIdAtractivo() {
-		return idAtractivo;
+	public Pais() {
+		this.departamentos = new ArrayList<Departamento>();
 	}
 
 	/**
-	 * @param idAtractivo the idAtractivo to set
+	 * @return the idPais
 	 */
-	public void setIdAtractivo(Long idAtractivo) {
-		this.idAtractivo = idAtractivo;
+	public Long getIdPais() {
+		return idPais;
+	}
+
+	/**
+	 * @param idPais the idPais to set
+	 */
+	public void setIdPais(Long idPais) {
+		this.idPais = idPais;
 	}
 
 	/**
@@ -114,34 +117,6 @@ public class Atractivo implements Serializable {
 	}
 
 	/**
-	 * @return the descripcion
-	 */
-	public String getDescripcion() {
-		return descripcion;
-	}
-
-	/**
-	 * @param descripcion the descripcion to set
-	 */
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
-	}
-
-	/**
-	 * @return the municipio
-	 */
-	public Municipio getMunicipio() {
-		return municipio;
-	}
-
-	/**
-	 * @param municipio the municipio to set
-	 */
-	public void setMunicipio(Municipio municipio) {
-		this.municipio = municipio;
-	}
-
-	/**
 	 * @return the foto
 	 */
 	public String getFoto() {
@@ -153,6 +128,20 @@ public class Atractivo implements Serializable {
 	 */
 	public void setFoto(String foto) {
 		this.foto = foto;
+	}
+
+	/**
+	 * @return the departamentos
+	 */
+	public List<Departamento> getDepartamentos() {
+		return departamentos;
+	}
+
+	/**
+	 * @param departamentos the departamentos to set
+	 */
+	public void setDepartamentos(List<Departamento> departamentos) {
+		this.departamentos = departamentos;
 	}
 
 }

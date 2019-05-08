@@ -60,9 +60,11 @@ public class UsuarioImplements implements IUsuarioService {
 		// TODO Auto-generated method stub
 
 		Usuario user = usuarioDao.findByCorreoOrApodo(correo, apodo);
+
 		if (user == null) {
 			return true;
 		} else {
+			System.out.println(user.getNombre());
 			return false;
 		}
 
@@ -71,9 +73,9 @@ public class UsuarioImplements implements IUsuarioService {
 	@Override
 	public Usuario findByCorreo(String correo) {
 		Usuario usuario = usuarioDao.findByCorreo(correo);
-		if( usuario == null) {
+		if (usuario == null) {
 			return null;
-		}else {
+		} else {
 			return usuario;
 		}
 	}

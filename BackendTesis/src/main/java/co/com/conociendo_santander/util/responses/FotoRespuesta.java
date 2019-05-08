@@ -19,7 +19,7 @@ public class FotoRespuesta implements Serializable {
 	private String url;
 	private String nombre;
 	private String apodo;
-	private String avatar;
+	private String fotoUsuario;
 	private long idMunicipio;
 	private String municipio;
 
@@ -28,18 +28,18 @@ public class FotoRespuesta implements Serializable {
 	 * @param url
 	 * @param nombre
 	 * @param apodo
-	 * @param avatar
+	 * @param fotoUsuario
 	 * @param idMunicipio
 	 * @param municipio
 	 */
-	public FotoRespuesta(Long id, String url, String nombre, String apodo, String avatar, long idMunicipio,
+	public FotoRespuesta(Long id, String url, String nombre, String apodo, String fotoUsuario, long idMunicipio,
 			String municipio) {
 		super();
 		this.id = id;
 		this.url = url;
 		this.nombre = nombre;
 		this.apodo = apodo;
-		this.avatar = avatar;
+		this.fotoUsuario = fotoUsuario;
 		this.idMunicipio = idMunicipio;
 		this.municipio = municipio;
 	}
@@ -103,15 +103,15 @@ public class FotoRespuesta implements Serializable {
 	/**
 	 * @return the avatar
 	 */
-	public String getAvatar() {
-		return avatar;
+	public String getfotoUsuario() {
+		return fotoUsuario;
 	}
 
 	/**
 	 * @param avatar the avatar to set
 	 */
-	public void setAvatar(String avatar) {
-		this.avatar = avatar;
+	public void setfotoUsuario(String fotoUsuario) {
+		this.fotoUsuario = fotoUsuario;
 	}
 
 	/**

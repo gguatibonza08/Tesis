@@ -36,7 +36,6 @@ public class LogroObjetivo implements Serializable {
 	@Column(name = "id_logro_objetivo")
 	private Long idLogroObjetivo;
 
-
 	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "logro")

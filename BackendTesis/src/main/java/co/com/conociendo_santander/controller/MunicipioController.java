@@ -38,7 +38,9 @@ public class MunicipioController {
 	public Municipio buscarPorId(@PathVariable Long id) {
 
 		if (municipioService.existId(id)) {
-			return municipioService.findById(id);
+			Municipio result = municipioService.findById(id);
+			result.setExtensa(result.getExtensa().replace(". ", ".\n"));
+			return result;
 
 		} else {
 			return null;
@@ -50,21 +52,18 @@ public class MunicipioController {
 	public List<MunicipioSimple> buscarPorDepartamento(@PathVariable Long id) {
 
 		if (departamentoService.existId(id)) {
-			List<MunicipioSimple> respuesta = new ArrayList<MunicipioSimple>();
+
 			Departamento depto = departamentoService.findById(id);
-
-			ArrayList<Municipio> municipios = (ArrayList<Municipio>) municipioService.findByDepartamento(depto);
-
-			for (Municipio x : municipios) {
-				MunicipioSimple aux = new MunicipioSimple(x.getIdMunicipio(), x.getNombre(), x.getDescripcionBasica(),
-						x.getFoto());
-				respuesta.add(aux);
+			List<MunicipioSimple> result = new ArrayList<MunicipioSimple>();
+			List<Municipio> municipios = municipioService.findByDepartamento(depto);
+			for (Municipio municipio : municipios) {
+				result.add(new MunicipioSimple(municipio.getIdMunicipio(), municipio.getNombre(), municipio.getFoto(),
+						municipio.getBasica()));
 			}
-			return respuesta;
+			return result;
 
 		} else {
 			return null;
 		}
 	}
-
 }
