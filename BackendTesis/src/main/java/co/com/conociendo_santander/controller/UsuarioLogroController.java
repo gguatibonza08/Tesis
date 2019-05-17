@@ -12,7 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -71,21 +70,28 @@ public class UsuarioLogroController {
 
 	@PostMapping(value = "/obtenerObjetivos", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
 	public List<ObjetivoResponse> getObjetivoLogro(UsuarioLogroPojo response) {
+
 		Usuario usuario = usuarioService.findById(response.getIdUsuario());
 		Logro logro = logroService.findById(response.getIdLogro());
 
 		List<LogroObjetivo> logrosAndObjetivos = logroObjetivo.findByLogro(logro);
 		List<ObjetivoResponse> result = new ArrayList<ObjetivoResponse>();
+
 		for (LogroObjetivo logroObjetivo : logrosAndObjetivos) {
+
 			UsuarioObjetivo aux = usuarioObjetivo.findByUsuarioAndObjetivo(usuario, logroObjetivo.getObjetivo());
+
 			ObjetivoResponse persist = new ObjetivoResponse(aux.getObjetivo().getIdObjetivo(),
 					aux.getObjetivo().getNombre(), aux.getObjetivo().getDescripcion());
+
 			if (aux.getEstado() == 1) {
 				persist.setCompletado(false);
 			} else {
 				persist.setCompletado(true);
 			}
 			result.add(persist);
+			System.out.println(persist.toString());
+
 		}
 		return result;
 

@@ -4,20 +4,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import co.com.conociendo_santander.entities.Logro;
 import co.com.conociendo_santander.entities.Municipio;
 import co.com.conociendo_santander.entities.Usuario;
+import co.com.conociendo_santander.entities.UsuarioLogro;
 import co.com.conociendo_santander.entities.UsuarioMunicipio;
+import co.com.conociendo_santander.services.ILogroService;
 import co.com.conociendo_santander.services.IMunicipioService;
+import co.com.conociendo_santander.services.IUsuarioLogroService;
 import co.com.conociendo_santander.services.IUsuarioMunicipioService;
 import co.com.conociendo_santander.services.IUsuarioService;
-import co.com.conociendo_santander.util.pojos.UsuarioMunicipioPojo;
 import co.com.conociendo_santander.util.responses.MunicipioVisitados;
 
 /**
@@ -28,6 +29,12 @@ import co.com.conociendo_santander.util.responses.MunicipioVisitados;
 @RestController
 @RequestMapping(value = "/usuariomunicipio")
 public class UsuarioMunicipioController {
+
+	@Autowired
+	private ILogroService iLogroService;
+
+	@Autowired
+	private IUsuarioLogroService iUsuarioLogro;
 
 	@Autowired
 	private IUsuarioMunicipioService iUsuarioMunicipio;
@@ -50,21 +57,60 @@ public class UsuarioMunicipioController {
 		return result;
 	}
 
-	@PostMapping(value = "/save", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-	public int saveMunicipio(UsuarioMunicipioPojo usuarioMunicipio) {
-		Municipio municipio = iMunicipioService.findById(usuarioMunicipio.getIdMunicipio());
-		boolean bandera = iUsuarioMunicipio.findByMunicipio(municipio);
-		if (bandera) {
-			Usuario usuario = iUsuarioService.findById(usuarioMunicipio.getIdUsuario());
-			UsuarioMunicipio persist = new UsuarioMunicipio();
-			persist.setUsuario(usuario);
-			persist.setMunicipio(municipio);
-			iUsuarioMunicipio.save(persist);
-			return 200;
+	@GetMapping(value = "/save/{idUsuario}/{idMunicipio}")
+	public int saveMunicipio(@PathVariable String idUsuario, @PathVariable String idMunicipio) {
+		System.out.println("idUsuario: " + idUsuario + " <-> idMUnicipio: " + idMunicipio);
+		if (!idUsuario.contains("NULL")) {
+			Municipio municipio = iMunicipioService.findById(Long.parseLong(idMunicipio));
+			boolean bandera = iUsuarioMunicipio.findByMunicipio(municipio);
+			if (bandera) {
+				Usuario usuario = iUsuarioService.findById(Long.parseLong(idUsuario));
+				UsuarioMunicipio persist = new UsuarioMunicipio();
+				persist.setUsuario(usuario);
+				persist.setMunicipio(municipio);
+				iUsuarioMunicipio.save(persist);
+				validarLogro(usuario);
+				return 200;
+			} else {
+				return 100;
+			}
 		} else {
 			return 100;
 		}
 
+	}
+
+	private void validarLogro(Usuario usuario) {
+		// TODO Auto-generated method stub
+		int municipios = iUsuarioMunicipio.findByUsuario(usuario).size();
+		Logro logro;
+		UsuarioLogro persist;
+		switch (municipios) {
+		case 10:
+			logro = iLogroService.findById(new Long(4));
+			persist = new UsuarioLogro(usuario, logro);
+			iUsuarioLogro.save(persist);
+			break;
+		case 27:
+			logro = iLogroService.findById(new Long(5));
+			persist = new UsuarioLogro(usuario, logro);
+			iUsuarioLogro.save(persist);
+			break;
+		case 52:
+			logro = iLogroService.findById(new Long(6));
+			persist = new UsuarioLogro(usuario, logro);
+			iUsuarioLogro.save(persist);
+			break;
+		case 87:
+			logro = iLogroService.findById(new Long(7));
+			persist = new UsuarioLogro(usuario, logro);
+			iUsuarioLogro.save(persist);
+			break;
+
+		default:
+			System.out.println("Aún no se puede agregar un logro");
+			break;
+		}
 	}
 
 }

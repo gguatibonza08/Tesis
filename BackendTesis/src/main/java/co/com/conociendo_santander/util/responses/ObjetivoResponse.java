@@ -90,4 +90,15 @@ public class ObjetivoResponse {
 		this.completado = completado;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "ObjetivoResponse [idObjetivo=" + idObjetivo + ", nombre=" + nombre + ", descripcion=" + descripcion
+				+ ", completado=" + completado + "]";
+	}
+
 }

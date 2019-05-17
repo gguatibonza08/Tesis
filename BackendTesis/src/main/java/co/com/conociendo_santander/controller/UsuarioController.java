@@ -4,7 +4,6 @@
 package co.com.conociendo_santander.controller;
 
 import java.util.List;
-import java.util.Random;
 
 import org.jasypt.util.password.BasicPasswordEncryptor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -187,10 +186,9 @@ public class UsuarioController {
 	}
 
 	@Transactional(readOnly = true)
-	@GetMapping(value = "/prueba")
-	public void pruebaUnity() {
-		System.out.println("llego al metodo de prueba");
-
+	@GetMapping(value = "/prueba/{idUsuario}/{idMunicipio}")
+	public void pruebaUnity(@PathVariable String idUsuario, @PathVariable String idMunicipio) {
+		System.out.println("llego al metodo de prueba -> " + idUsuario + " : " + idMunicipio);
 		System.out.println("OK");
 
 	}
